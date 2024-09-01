@@ -149,7 +149,7 @@ END:VCARD`;
           ) : (
             <FormControl >
           <FormLabel fontWeight="bold">
-            Enter {qrType.charAt(0).toUpperCase() + qrType.slice(1)}
+            Enter {qrType.charAt(0).toUpperCase() + qrType.slice(1)}:
           </FormLabel>
           <Input
               type={qrType === "email" ? "email" : "text"}
