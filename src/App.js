@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import QRGenerator from "./components/QRGenerator";
+import * as React from "react";
+import { ChakraProvider, Grid, GridItem, Box } from "@chakra-ui/react";
+import NavBar from "./components/NavBar";
 
 function App() {
+  const [qrType, setQrType] = React.useState("vcard");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ChakraProvider>
+      <Box  minH="100vh" >
+        <Grid
+          templateColumns={{ base: "1fr", md: "1fr 4fr" }}
+          alignItems="start"
+          justifyContent="center"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <GridItem
+            colSpan={{ base: 1, md: 1 }}
+            borderRight={{ base: "none", md: "2px solid gray.700" }}
+          >
+            <NavBar setQrType={setQrType} />
+          </GridItem>
+          <GridItem
+            colSpan={{ base: 1, md: 1 }}
+          >
+            <QRGenerator qrType={qrType} />
+          </GridItem>
+        </Grid>
+      </Box>
+    </ChakraProvider>
   );
 }
 
