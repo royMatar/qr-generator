@@ -13,6 +13,7 @@ import {
 import VCardInput from "./VCardInput";
 import QRSettings from "./QRSettings";
 import QRDisplay from "./QRDisplay";
+import SimpleInput from "./SimpleInput";
 
 const QRGenerator = ({ qrType }) => {
   const [inputValue, setInputValue] = useState("");
@@ -159,26 +160,11 @@ END:VCARD`;
               handleVCardChange={handleVCardChange}
             />
           ) : (
-            <FormControl>
-              <FormLabel fontWeight="bold">
-                Enter {qrType.charAt(0).toUpperCase() + qrType.slice(1)}:
-              </FormLabel>
-              <Input
-                type={qrType === "email" ? "email" : "text"}
-                placeholder={`Enter ${
-                  qrType.charAt(0).toUpperCase() + qrType.slice(1)
-                }`}
-                value={inputValue}
-                onChange={handleInputChange}
-                size="lg"
-                mb={isLargeScreen ? 0 : 4}
-                borderColor="gray.200"
-                _focus={{
-                  borderColor: "blue.500",
-                  boxShadow: "0 0 0 1px blue.500",
-                }}
-              />
-            </FormControl>
+            <SimpleInput
+              qrType={qrType}
+              inputValue={inputValue}
+              handleInputChange={handleInputChange}
+            />
           )}
         </Box>
 
