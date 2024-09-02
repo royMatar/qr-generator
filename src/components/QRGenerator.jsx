@@ -7,7 +7,8 @@ import {
   Stack,
   useBreakpointValue,
   useToast,
-  FormControl,FormLabel
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
 import VCardInput from "./VCardInput";
 import QRSettings from "./QRSettings";
@@ -20,7 +21,6 @@ const QRGenerator = ({ qrType }) => {
     lastName: "",
     phone: "",
     email: "",
-    organization: "",
     title: "",
     address: "",
     website: "",
@@ -68,7 +68,7 @@ const QRGenerator = ({ qrType }) => {
       console.error("Unsupported format:", format);
       return;
     }
-  
+
     const canvas = qrRef.current?.querySelector("canvas");
     if (!canvas) {
       toast({
@@ -81,7 +81,7 @@ const QRGenerator = ({ qrType }) => {
       console.error("QR Code canvas not found.");
       return;
     }
-  
+
     try {
       const dataURL = canvas.toDataURL(`image/${format}`);
       const link = document.createElement("a");
@@ -101,8 +101,6 @@ const QRGenerator = ({ qrType }) => {
       console.error("Failed to download QR Code:", error);
     }
   };
-  
-  
 
   const generateQrValue = () => {
     switch (qrType) {
@@ -116,9 +114,8 @@ const QRGenerator = ({ qrType }) => {
         return `sms:${inputValue}`;
       case "vcard":
         return `BEGIN:VCARD
-VERSION:3.0
+VERSION:4.0
 FN:${vCardDetails.firstName} ${vCardDetails.lastName}
-ORG:${vCardDetails.organization}
 TITLE:${vCardDetails.title}
 TEL:${vCardDetails.phone}
 EMAIL:${vCardDetails.email}
@@ -133,36 +130,55 @@ END:VCARD`;
   const isLargeScreen = useBreakpointValue({ base: false, lg: true });
 
   return (
-    <Center display="flex" justifyContent="center" alignItems="center" px={6} py={4}>
+    <Center
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      px={6}
+      py={4}
+    >
       <Stack
-        direction={qrType === "vcard" ? (isLargeScreen ? "row" : "column") : "column"}
+        direction={
+          qrType === "vcard" ? (isLargeScreen ? "row" : "column") : "column"
+        }
         spacing={5}
         width="100%"
         maxW="1200px"
       >
-        <Box flex="1" p={4} borderWidth={1} borderRadius="md" boxShadow="sm" bg="gray.50">
+        <Box
+          flex="1"
+          p={4}
+          borderWidth={1}
+          borderRadius="md"
+          boxShadow="sm"
+          bg="gray.50"
+        >
           {qrType === "vcard" ? (
             <VCardInput
               vCardDetails={vCardDetails}
               handleVCardChange={handleVCardChange}
             />
           ) : (
-            <FormControl >
-          <FormLabel fontWeight="bold">
-            Enter {qrType.charAt(0).toUpperCase() + qrType.slice(1)}:
-          </FormLabel>
-          <Input
-              type={qrType === "email" ? "email" : "text"}
-              placeholder={`Enter ${qrType.charAt(0).toUpperCase() + qrType.slice(1)}`}
-              value={inputValue}
-              onChange={handleInputChange}
-              size="lg"
-              mb={isLargeScreen ? 0 : 4}
-              borderColor="gray.200"
-              _focus={{ borderColor: "blue.500", boxShadow: "0 0 0 1px blue.500" }}
-            />
-        </FormControl>
-            
+            <FormControl>
+              <FormLabel fontWeight="bold">
+                Enter {qrType.charAt(0).toUpperCase() + qrType.slice(1)}:
+              </FormLabel>
+              <Input
+                type={qrType === "email" ? "email" : "text"}
+                placeholder={`Enter ${
+                  qrType.charAt(0).toUpperCase() + qrType.slice(1)
+                }`}
+                value={inputValue}
+                onChange={handleInputChange}
+                size="lg"
+                mb={isLargeScreen ? 0 : 4}
+                borderColor="gray.200"
+                _focus={{
+                  borderColor: "blue.500",
+                  boxShadow: "0 0 0 1px blue.500",
+                }}
+              />
+            </FormControl>
           )}
         </Box>
 

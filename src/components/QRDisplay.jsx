@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import QRCode from 'qrcode.react';
+import QRCodeSVG from 'qrcode.react';
 import { Box, Button, Flex, useBreakpointValue } from '@chakra-ui/react';
 
 const QRDisplay = ({
@@ -44,7 +44,7 @@ const QRDisplay = ({
         mb={4}
         borderColor="gray.200"
       >
-        <QRCode
+        <QRCodeSVG
           value={qrValue}
           size={parseInt(size, 10)}
           fgColor={fgColor}

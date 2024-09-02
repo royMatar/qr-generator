@@ -39,7 +39,7 @@ const QRSettings = ({
           justifyContent="space-between"
           width="100%"
         >
-          <FormControl id="size" width={isSmallScreen ? "48%" : "47%"}>
+          {/* <FormControl id="size" width={isSmallScreen ? "48%" : "47%"}>
             <FormLabel>Size: {size}</FormLabel>
             <Slider
               aria-label="size-slider"
@@ -55,6 +55,18 @@ const QRSettings = ({
               </SliderTrack>
               <SliderThumb />
             </Slider>
+          </FormControl> */}
+          <FormControl id="errorCorrectionLevel" width={isSmallScreen ? "48%" : "47%"}>
+            <FormLabel>Error Correction Level:</FormLabel>
+            <Select
+              value={errorCorrectionLevel}
+              onChange={(e) => setErrorCorrectionLevel(e.target.value)}
+            >
+              <option value="L">L - Low (7%)</option>
+              <option value="M">M - Medium (15%)</option>
+              <option value="Q">Q - Quartile (25%)</option>
+              <option value="H">H - High (30%)</option>
+            </Select>
           </FormControl>
 
           <FormControl id="includeMargin" width={isSmallScreen ? "48%" : "47%"}>
@@ -66,7 +78,7 @@ const QRSettings = ({
           </FormControl>
 
           <FormControl id="fgColor" width={isSmallScreen ? "48%" : "47%"}>
-            <FormLabel>QR Code Color:</FormLabel>
+            <FormLabel>Foreground Color:</FormLabel>
             <Input
               type="color"
               value={fgColor}
@@ -83,18 +95,7 @@ const QRSettings = ({
             />
           </FormControl>
 
-          <FormControl id="errorCorrectionLevel" width={isSmallScreen ? "48%" : "47%"}>
-            <FormLabel>Error Correction Level:</FormLabel>
-            <Select
-              value={errorCorrectionLevel}
-              onChange={(e) => setErrorCorrectionLevel(e.target.value)}
-            >
-              <option value="L">L - Low (7%)</option>
-              <option value="M">M - Medium (15%)</option>
-              <option value="Q">Q - Quartile (25%)</option>
-              <option value="H">H - High (30%)</option>
-            </Select>
-          </FormControl>
+          
 
           {/* <FormControl id="logo" width={isSmallScreen ? "48%" : "47%"}>
             <FormLabel>Insert Logo:</FormLabel>
