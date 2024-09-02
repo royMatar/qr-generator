@@ -33,11 +33,11 @@ const SimpleInput = ({ qrType, inputValue, handleInputChange }) => {
   const getPlaceholder = (type) => {
     switch (type) {
       case "phone":
-        return "Enter phone number";
+        return "Enter Phone Number";
       case "email":
-        return "Enter email address";
+        return "Enter Email Address";
       case "sms":
-        return "Enter SMS number";
+        return "Enter SMS Number";
       default:
         return `Enter ${type.charAt(0).toUpperCase() + type.slice(1)}`;
     }
